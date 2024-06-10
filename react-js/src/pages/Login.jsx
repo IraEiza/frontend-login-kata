@@ -8,7 +8,7 @@ import { translateError } from "../utils/translateError.js";
 import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
@@ -45,7 +45,8 @@ export const Login = () => {
               localStorage.setItem("token", payload.jwt);
             })
             .then(() => {
-              navigate("/recipes");
+              //navigate("/recipes");
+              console.log('Navegandooo...')
             })
             .catch((error) => {
               setErrorMessage(error.message);
