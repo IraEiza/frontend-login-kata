@@ -5,10 +5,8 @@ import { PasswordField } from "../components/PasswordField.jsx";
 import { Title } from "../components/Title.jsx";
 import { Button } from "../components/Button.jsx";
 import { translateError } from "../utils/translateError.js";
-import { useNavigate } from "react-router-dom";
 
-export const Login = () => {
-  //const navigate = useNavigate();
+export const Login = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
@@ -45,8 +43,8 @@ export const Login = () => {
               localStorage.setItem("token", payload.jwt);
             })
             .then(() => {
-              //navigate("/recipes");
               console.log('Navegandooo...')
+              navigate("/recipes");
             })
             .catch((error) => {
               setErrorMessage(error.message);
