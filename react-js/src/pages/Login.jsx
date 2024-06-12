@@ -5,8 +5,11 @@ import { PasswordField } from "../components/PasswordField.jsx";
 import { Title } from "../components/Title.jsx";
 import { Button } from "../components/Button.jsx";
 import { translateError } from "../utils/translateError.js";
+import { login } from "../services/authService.js";
+
 
 export const Login = ({ navigate }) => {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
@@ -25,25 +28,11 @@ export const Login = ({ navigate }) => {
           setIsLoading(true);
           setErrorMessage(null);
 
-          fetch("https://backend-login-placeholder.deno.dev/api/users/login", {
-            method: "POST",
-            body: JSON.stringify({ email, password }),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              if (data.status === "error") {
-                throw new Error(data.code);
-              }
-              return data.payload;
-            })
+          login(email, password)
             .then((payload) => {
               localStorage.setItem("token", payload.jwt);
             })
             .then(() => {
-              console.log('Navegandooo...')
               navigate("/recipes");
             })
             .catch((error) => {
