@@ -1,4 +1,4 @@
-const login = (email, password) => {
+export const login = (email, password) => {
     
     return fetch("https://backend-login-placeholder.deno.dev/api/users/login", {
         method: "POST",
@@ -14,8 +14,4 @@ const login = (email, password) => {
             }
             return data.payload;
         })
-}
-
-module.exports = {
-    login
 }
